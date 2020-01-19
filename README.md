@@ -1,2 +1,2 @@
-# monadicity
+# Almonad
 Lightweight Monads in Javascript
