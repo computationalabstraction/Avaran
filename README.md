@@ -1,2 +1,2 @@
 # Almonad
-Lightweight Monads in Javascript
+Alluring Lightweight Monads in Javascript
