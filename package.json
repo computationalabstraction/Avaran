@@ -1,0 +1,19 @@
+{
+  "name": "almonad",
+  "version": "1.0.0",
+  "description": "Alluring Lightweight Monads in Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archanpatkar/Almonad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/archanpatkar/Almonad/issues"
+  },
+  "homepage": "https://github.com/archanpatkar/Almonad#readme"
+}
