@@ -1,2 +1,2 @@
-# Almonad
-Alluring Lightweight Monads in Javascript
+# Avaran
+Alluring Monads and Monad Transformers for Typescript
