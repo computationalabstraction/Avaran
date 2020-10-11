@@ -1,2 +1,2 @@
 # Avaran
-Alluring Monads and Monad Transformers for Javascript
+Alluring Monads for Javascript
