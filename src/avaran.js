@@ -1,4 +1,25 @@
+// Add Fantasy Land and Static Land support.
 const { sum, tagged } = require("./styp");
+
+// Reader Monad
+const Reader = tagged("Reader", ["action"]);
+
+Reader.prototype.map = function(transformer) {
+    return Reader((dep) => transformer(this.run(dep)));
+};
+
+Reader.prototype.flatMap = function(transformer) {
+    return Reader((dep) => {
+        const out = this.run(dep);
+        if(Reader.is(out)) return out.flatMap(transformer);
+        const tval = transformer(out);
+        return Reader.is(tval)?transformer(out).run(dep):tval;
+    });
+};
+
+Reader.prototype.run = function(dep) {
+    return this.action(dep);
+};
 
 // IO Monad
 const IO = tagged("IO", ["effect"]);
@@ -20,11 +41,6 @@ IO.prototype.run = function() {
     return this.effect();
 };
 
-IO.prototype.join = function(...other) {
-    return IO(() => {
-        return [this,...other].map(io => io.run());
-    });
-};
 
 // Maybe Monad
 const Maybe = sum("Maybe", {
