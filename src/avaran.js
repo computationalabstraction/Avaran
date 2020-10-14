@@ -1,6 +1,105 @@
 // Add Fantasy Land and Static Land support.
 const { sum, tagged } = require("./styp");
 
+// Either Monad
+// Right biased
+const Either = sum("Either", {
+    Left:["v"],
+    Right:["v"]
+});
+
+Either.prototype.map = function(transformer) {
+    return this.cata({
+        Right: ({ v }) => Either.Right(transformer(v)),
+        Left: () => this
+    });
+};
+
+Either.prototype.leftMap = function(transformer) {
+    return this.cata({
+        Right: () => this,
+        Left: ({ v }) => Either.Left(transformer(v))
+    });
+};
+
+Either.prototype.flatMap = function(transformer) {
+    return this.cata({
+        Right: ({ v }) => Either.is(v)?v.flatMap(transformer):Either.Right(transformer(v)),
+        Left: () => this
+    });
+};
+
+Either.prototype.catchMap = function(transformer) {
+    return this.cata({
+        Right: () => this,
+        Left: ({ v }) => Either.is(v)?v.flatMap(transformer):Either.Left(transformer(v))
+    });
+};
+
+Either.prototype.cataM = function(ifRight, ifLeft) {
+    return this.cata({
+        Right: ({ v }) => ifRight(v),
+        Left: ({ v }) => ifLeft(v)
+    });
+};
+
+Either.prototype.bimap = function(rTransformer,lTransformer) {
+    return this.cata({
+        Right: ({ v }) => Either.Right(rTransformer(v)),
+        Left: ({ v }) => Either.Left(lTransformer(v))
+    });
+}
+
+Either.prototype.swap = function() {
+    return this.cata({
+        Right: ({ v }) => Either.Left(v),
+        Left: ({ v }) => Either.Right(v)
+    });
+};
+
+Either.prototype.isRight = function() {
+    return Either.Right.is(this);
+};
+
+Either.prototype.isLeft = function() {
+    return Either.Left.is(this);
+};
+
+Either.prototype.foldLeft = function(inital,transformer) {
+    return this.cata({
+        Right: ({ v }) => transformer(inital,v),
+        Left: () => inital
+    });
+};
+
+Either.prototype.foldRight = function(inital,transformer) {
+    return this.cata({
+        Right: ({ v }) => transformer(v,inital),
+        Left: () => inital
+    });
+};
+
+Either.prototype.right = function() {
+    return this.cata({
+        Right: ({ v }) => v,
+        Left: () => { throw new Error("Either.Right was expected") }
+    });
+}
+
+Either.prototype.left = function() {
+    return this.cata({
+        Right: () => { throw new Error("Either.Left was expected") },
+        Left: ({ v }) => v
+    });
+}
+
+Either.prototype.contains = function(val) {
+    return this.cata({
+        Right: ({ v }) => v == val,
+        Left: ({ v }) => v == val
+    });
+}
+
 // Reader Monad
 const Reader = tagged("Reader", ["action"]);
 
@@ -40,7 +139,6 @@ IO.prototype.flatMap = function(transformer) {
 IO.prototype.run = function() {
     return this.effect();
 };
-
 
 // Maybe Monad
 const Maybe = sum("Maybe", {
