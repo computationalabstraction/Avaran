@@ -41,10 +41,34 @@ Free.prototype.go = function(extract) {
 
 
 // Immutable Lists
-const Free = sum("List", {
+const List = sum("List", {
     Nil:[],
     Cell:["car","cdr"]
 });
+
+List.prototype.map = function(transformer) {
+    this.cata({
+
+    });
+};
+
+List.prototype.flatMap = function(transformer) {
+    this.cata({
+
+    });
+};
+
+List.prototype.foldLeft = function(func) {
+    this.cata({
+
+    });
+};
+
+List.prototype.foldRight = function(func) {
+    this.cata({
+
+    });
+};
 
 
 // Either Monad
