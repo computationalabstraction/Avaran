@@ -7,6 +7,46 @@ const Free = sum("Free", {
     Suspend:["f"]
 });
 
+Free.lift = function(monad) {
+    return Free.Suspend(monad)
+};
+
+Free.prototype.map = function(transformer) {
+    this.cata({
+        Return: ({ v }) => Free.Return(transformer(v)),
+        Suspend: ({ f }) => Free.Suspend(f.map(fr => fr.map(transformer)))
+    });
+};
+
+Free.prototype.flatMap = function(transformer) {
+    this.cata({
+        Return: ({ v }) => Free.Return(transformer(v)),
+        Suspend: ({ f }) => Free.Suspend(f.map(fr => fr.flatMap(transformer)))
+    });
+};
+
+Free.prototype.resume = function() {
+    this.cata({
+        Return: ({ v }) => v,
+        Suspend: ({ f }) => f
+    });
+};
+
+Free.prototype.go = function(extract) {
+    this.cata({
+        Return: ({ v }) => v,
+        Suspend: ({ f }) => extract(f).go(extract)
+    });
+};
+
+
+// Immutable Lists
+const Free = sum("List", {
+    Nil:[],
+    Cell:["car","cdr"]
+});
+
+
 // Either Monad
 // Right biased
 const Either = sum("Either", {
