@@ -1,6 +1,21 @@
 // Add Fantasy Land and Static Land support.
 const { sum, tagged } = require("./styp");
 
+const Identity = tagged("Identity",["val"]);
+
+Identity.prototype.map = function(transformer) {
+    return Identity(transformer(this.val));
+}
+
+Identity.prototype.flatMap = function(transformer) {
+    if(Identity.is(this.val)) return this.val.flatMap(transformer);
+    return Identity(transformer(this.val));
+}
+
+Identity.prototype.unbox = function() {
+    return this.val;
+}
+
 // Free Monad
 const Free = sum("Free", {
     Return:["v"],
