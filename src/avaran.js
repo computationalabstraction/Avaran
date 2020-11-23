@@ -1,5 +1,5 @@
 // Add Fantasy Land and Static Land support.
-const { sum, tagged } = require("./styp");
+const { sum, tagged } = require("styp");
 
 // Identity
 const Identity = tagged("Identity",["val"]);
@@ -18,16 +18,39 @@ Identity.prototype.unbox = function() {
 }
 
 // State Monad
-const State = tagged("State", ["f"]);
+const State = tagged("State", ["comp"]);
+
+State.get = function(func) {
+    return State(s => {
+        const out = func(s);
+        return [s,out];
+    });
+};
+
+State.put = function(val) {
+    return State(() => [val,val]);
+};
 
 State.prototype.map = function(transformer) {
+
 };
 
 State.prototype.flatMap = function(transformer) {
 
 };
 
-State.prototype.run = function() {
+State.prototype.runWith = function(state) {
+    return this.comp(state);
+};
+
+State.prototype.evalWith = function(state) {
+    const pair = this.comp(state);
+    return pair[1];
+};
+
+State.prototype.execWith = function(state) {
+    const pair = this.comp(state);
+    return pair[0];
 };
 
 // Free Monad
