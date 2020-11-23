@@ -1,19 +1,28 @@
 {
-  "name": "almonad",
-  "version": "1.0.0",
+  "name": "avaran",
+  "version": "0.0.1",
   "description": "Alluring Lightweight Monads in Javascript",
-  "main": "index.js",
+  "main": "avaran.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/archanpatkar/Almonad.git"
+    "url": "git+https://github.com/computationalabstraction/Avaran.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Archan Patkar",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/archanpatkar/Almonad/issues"
+    "url": "https://github.com/computationalabstraction/Avaran/issues"
   },
-  "homepage": "https://github.com/archanpatkar/Almonad#readme"
+  "homepage": "https://github.com/computationalabstraction/Avaran#readme",
+  "keywords": [
+    "Monads"
+  ],
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "styp": "0.0.1"
+  }
 }
