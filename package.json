@@ -4,7 +4,8 @@
   "description": "Alluring Lightweight Monads in Javascript",
   "main": "avaran.js",
   "scripts": {
-    "test": "echo \"Todo: no test specified\" && exit 0"
+    "test": "echo \"Todo: no test specified\" && exit 0",
+    "build": "echo \"Temp placeholder\" && exit 0"
   },
   "repository": {
     "type": "git",
