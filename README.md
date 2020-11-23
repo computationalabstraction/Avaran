@@ -1,8 +1,7 @@
 <div align="center">
 <img src="./static/avaran.png" />
-</div>
-
 <h3>Alluring Monads for Javascript</h3>
+</div>
 <hr/>
 
 > Monad transformers are also wip
