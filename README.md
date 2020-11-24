@@ -7,3 +7,12 @@
 > Monad transformers are also wip
 
 Avaran is a library which provides implementations of many widely used monads in functional programming languages such as `Haskell`, `F#` etc in Javascript.
+
+### Monads implemented
+
+* #### `Identity`
+* #### `Maybe`
+* #### `Either`
+* #### `IO`
+* #### `Reader`
+* #### `Free`
