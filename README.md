@@ -16,3 +16,4 @@ Avaran is a library which provides implementations of many widely used monads in
 * #### `IO`
 * #### `Reader`
 * #### `Free`
+* #### `State` (WIP)
