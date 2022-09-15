@@ -22,7 +22,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-env": "^7.19.1",
     "browserify": "^17.0.0",
     "jest": "^27.4.5",
     "vachan": "0.0.2"
